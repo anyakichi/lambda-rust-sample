@@ -1,13 +1,12 @@
-use std::error::Error;
-
-use lambda_runtime::{error::HandlerError, lambda, Context};
+use lambda_runtime::{Error, handler_fn, Context};
 use serde_json::Value;
 
-fn main() -> Result<(), Box<dyn Error>> {
-    lambda!(handler);
+#[tokio::main]
+async fn main() -> Result<(), Error> {
+    lambda_runtime::run(handler_fn(handler)).await?;
     Ok(())
 }
 
-fn handler(event: Value, _: Context) -> Result<Value, HandlerError> {
+async fn handler(event: Value, _: Context) -> Result<Value, Error> {
     Ok(event)
 }
