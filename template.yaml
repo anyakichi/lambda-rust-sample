@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Sample rust application for Lambda
+
+Resources:
+  LambdaRustSample:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      ImageUri: anyakichi/lambda-rust-sample:main
+      ImageConfig:
+        Command:
+          - app.lambda_handler
