@@ -14,4 +14,11 @@ ENV \
   GIT_REPO=https://github.com/anyakichi/lambda-rust-sample.git
 
 COPY --from=builder /build/target/release/bootstrap /var/runtime/bootstrap
-RUN chown root: /var/runtime/bootstrap
+RUN \
+  mkdir -p /build/target/release \
+  && touch /build/Cargo.toml \
+  && ln -s /var/runtime/bootstrap /build/target/release/bootstrap \
+  && chown -R builder: /build \
+  && chown root: /var/runtime/bootstrap
+
+WORKDIR /build
