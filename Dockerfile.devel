@@ -1,0 +1,3 @@
+FROM anyakichi/lambda-rust-builder:al2
+
+COPY target/release/bootstrap /var/runtime/bootstrap
